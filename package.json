@@ -1,0 +1,27 @@
+{
+  "name": "find-a-friend-api",
+  "version": "1.0.0",
+  "description": "Essa é uma aplicação de adoção de animais, a Find a Friend API.\r Esse é um projeto que foi desenvolvido a partir de princípios de SOLID, e conteplando testes Unitários e E2E.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "start": "node build/server.js",
+    "build": "tsup src --out-dir build",
+    "lint": "eslint --fix src/"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@rocketseat/eslint-config": "2.2.2",
+    "@types/node": "^20.14.10",
+    "tsup": "^8.1.0",
+    "tsx": "^4.16.2",
+    "typescript": "^5.5.3"
+  },
+  "dependencies": {
+    "dotenv": "16.4.5",
+    "fastify": "4.28.1",
+    "zod": "3.23.8"
+  }
+}
