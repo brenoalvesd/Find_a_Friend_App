@@ -1,3 +1,4 @@
 documentation.md
 node_modules
 build
+.env
