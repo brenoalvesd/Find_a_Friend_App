@@ -7,7 +7,8 @@
     "dev": "tsx watch src/server.ts",
     "start": "node build/server.js",
     "build": "tsup src --out-dir build",
-    "lint": "eslint --fix src/"
+    "lint": "eslint --fix src/",
+    "test": "vitest"
   },
   "keywords": [],
   "author": "",
@@ -16,9 +17,10 @@
     "@rocketseat/eslint-config": "2.2.2",
     "@types/node": "^20.14.10",
     "prisma": "5.16.1",
+    "supertest": "7.0.0",
     "tsup": "^8.1.0",
     "tsx": "^4.16.2",
-    "typescript": "^5.5.3"
+    "typescript": "5.5.3"
   },
   "dependencies": {
     "@prisma/client": "5.16.1",

@@ -1,7 +1,7 @@
 ## Sobre o projeto 
 
 Essa é uma aplicação de adoção de animais, a Find a Friend API.
-Esse é um projeto que foi desenvolvido a partir de princípios de SOLID, e contemplando testes Unitários e E2E. 
+Esse é um projeto que foi desenvolvido a partir de princípios de SOLID, e contemplando testes Unitários e E2E com o Jest. 
 
 ## Ferramentas utilizadas
 
@@ -12,7 +12,7 @@ Esse é um projeto que foi desenvolvido a partir de princípios de SOLID, e cont
 - Prisma
 - Docker
 - EsLint
-- Vitest -> Avaliar usar Jest 
+- Jest 
 - BCryptJS
 - Supertest
 
