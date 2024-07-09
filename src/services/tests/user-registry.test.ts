@@ -3,7 +3,6 @@ import { RegisterService } from '../user-register-service'
 import { compare } from 'bcryptjs'
 import { InMemoryUsersRepository } from '@/repositories/in-memory/in-memory-users-repository'
 import { UserAlreadyExistsError } from '../errors/user-already-exists-error'
-import { string } from 'zod'
 
 describe('User Registry Use Case', () => {
   it('should be able to register', async () => {
