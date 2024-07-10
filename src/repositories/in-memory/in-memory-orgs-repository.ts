@@ -1,12 +1,12 @@
 import { Prisma, Org } from '@prisma/client'
-import { OrgsRepository } from '../org-repository'
+import { OrgsRepository } from '@/repositories/org-repository'
 import { randomUUID } from 'crypto'
 
 export class InMemoryOrgsRepository implements OrgsRepository {
   public items: Org[] = []
 
-  async findByPhone(phone: string) {
-    const org = this.items.find((item) => item.phone === phone)
+  async findByName(name: string) {
+    const org = this.items.find((item) => item.name === name)
 
     if (!org) {
       return null

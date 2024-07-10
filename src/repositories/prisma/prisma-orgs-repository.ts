@@ -1,20 +1,20 @@
 import { prisma } from '@/lib/prisma'
 import { Prisma } from '@prisma/client'
-import { OrgsRepository } from '../org-repository'
+import { OrgsRepository } from '@/repositories/org-repository'
 
 export class PrismaOrgsRepository implements OrgsRepository {
-  async findByPhone(phone: string) {
-    const orgPhone = await prisma.org.findUnique({
+  async findByName(name: string) {
+    const org = await prisma.org.findUnique({
       where: {
-        phone,
+        name,
       },
     })
 
-    if (!orgPhone) {
+    if (!org) {
       return null
     }
 
-    return orgPhone
+    return org
   }
 
   async create(data: Prisma.OrgCreateInput) {
