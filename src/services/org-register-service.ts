@@ -1,12 +1,13 @@
 import { Org } from '@prisma/client'
 import { OrgsRepository } from '@/repositories/org-repository'
+import { hash } from 'bcryptjs'
 
 interface OrgRegisterServiceRequest {
   name: string
   city: string
   address: string
   phone: string
-  password_hash: string
+  password: string
 }
 
 interface OrgRegisterServiceResponse {
@@ -21,8 +22,10 @@ export class OrgRegisterService {
     city,
     address,
     phone,
-    password_hash,
+    password,
   }: OrgRegisterServiceRequest): Promise<OrgRegisterServiceResponse> {
+    const password_hash = await hash(password, 6)
+
     const org = await this.orgsRepository.create({
       name,
       city,

@@ -9,11 +9,12 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
     city: z.string(),
     address: z.string(),
     phone: z.string(),
-    password_hash: z.string().min(6),
+    password: z.string().min(6),
   })
 
-  const { name, city, address, phone, password_hash } =
-    createOrgBodySchema.parse(request.body)
+  const { name, city, address, phone, password } = createOrgBodySchema.parse(
+    request.body,
+  )
 
   try {
     const createOrgUseCase = makeRegisterOrgUseCase()
@@ -23,7 +24,7 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
       city,
       address,
       phone,
-      password_hash,
+      password,
     })
   } catch (err) {
     if (err instanceof OrgAlreadyExistsError) {
