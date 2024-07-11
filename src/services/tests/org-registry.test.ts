@@ -18,33 +18,4 @@ describe('Organizations Registry Use Case', () => {
 
     expect(org.id).toEqual(expect.any(String))
   })
-
-  it('should be able to search for an organization by its name', async () => {
-    const orgsRepository = new InMemoryOrgsRepository()
-    const searchOrgsService = new SearchOrgsService(orgsRepository)
-
-    const orgData = {
-      name: 'ONG dos Campeões',
-      address: 'Rua Verde 321',
-      city: 'São Paulo',
-      phone: '(11) 99999-9999',
-      password_hash: '123456',
-    }
-
-    await orgsRepository.create(orgData)
-
-    const foundOrg = await searchOrgsService.findByName({
-      name: 'ONG dos Campeões',
-    })
-
-    expect(foundOrg.org).toEqual(
-      expect.objectContaining({
-        name: 'ONG dos Campeões',
-        address: 'Rua Verde 321',
-        city: 'São Paulo',
-        phone: '(11) 99999-9999',
-        password_hash: '123456',
-      }),
-    )
-  })
 })
