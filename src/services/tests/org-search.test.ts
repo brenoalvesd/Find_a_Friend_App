@@ -5,7 +5,7 @@ import { it, expect, describe } from 'vitest'
 describe('Organizations Search Use Case', () => {
   it('should be able to search for an organization by its name', async () => {
     const orgsRepository = new InMemoryOrgsRepository()
-    const searchOrgsService = new SearchOrgsService(orgsRepository)
+    const sut = new SearchOrgsService(orgsRepository)
 
     const orgData = {
       name: 'ONG dos Campeões',
@@ -17,7 +17,7 @@ describe('Organizations Search Use Case', () => {
 
     await orgsRepository.create(orgData)
 
-    const foundOrg = await searchOrgsService.findByName({
+    const foundOrg = await sut.findByName({
       name: 'ONG dos Campeões',
     })
 
