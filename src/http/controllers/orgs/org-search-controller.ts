@@ -3,11 +3,11 @@ import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
 export async function search(request: FastifyRequest, reply: FastifyReply) {
-  const searchOrgBodySchema = z.object({
+  const searchOrgParamsSchema = z.object({
     name: z.string(),
   })
 
-  const { name } = searchOrgBodySchema.parse(request.query)
+  const { name } = searchOrgParamsSchema.parse(request.params)
 
   const searchOrgUseCase = makeSearchOrgUseCase()
 
