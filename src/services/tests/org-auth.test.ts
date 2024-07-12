@@ -1,14 +1,19 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, beforeEach } from 'vitest'
 import { InMemoryOrgsRepository } from '@/repositories/in-memory/in-memory-orgs-repository'
 import { AuthenticateOrgService } from '../authenticate-orgs-service'
 import { hash } from 'bcryptjs'
 import { InvalidCredentialsError } from '../errors/invalid-credentials-error'
 
 describe('Organizations Authenticate Use Case', () => {
-  it('should be able to authenticate an organization', async () => {
-    const orgsRepository = new InMemoryOrgsRepository()
-    const sut = new AuthenticateOrgService(orgsRepository)
+  let orgsRepository: InMemoryOrgsRepository
+  let sut: AuthenticateOrgService
 
+  beforeEach(() => {
+    orgsRepository = new InMemoryOrgsRepository()
+    sut = new AuthenticateOrgService(orgsRepository)
+  })
+
+  it('should be able to authenticate an organization', async () => {
     await orgsRepository.create({
       name: 'ONG dos Campeões',
       address: 'Rua Verde 321',
@@ -26,9 +31,6 @@ describe('Organizations Authenticate Use Case', () => {
   })
 
   it('should not be able to authenticate an org when its name is already registered', async () => {
-    const orgsRepository = new InMemoryOrgsRepository()
-    const sut = new AuthenticateOrgService(orgsRepository)
-
     await expect(() =>
       sut.execute({
         name: 'ONG dos Campeões',
@@ -38,9 +40,6 @@ describe('Organizations Authenticate Use Case', () => {
   })
 
   it('should not be able to authenticate an org when the input password does not matches with the registered one', async () => {
-    const orgsRepository = new InMemoryOrgsRepository()
-    const sut = new AuthenticateOrgService(orgsRepository)
-
     await orgsRepository.create({
       name: 'ONG dos Campeões',
       address: 'Rua Verde 321',

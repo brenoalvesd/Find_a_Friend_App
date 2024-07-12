@@ -1,14 +1,19 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, beforeEach } from 'vitest'
 import { UserRegisterService } from '../user-register-service'
 import { compare } from 'bcryptjs'
 import { InMemoryUsersRepository } from '@/repositories/in-memory/in-memory-users-repository'
 import { UserAlreadyExistsError } from '../errors/user-already-exists-error'
 
 describe('User Registry Use Case', () => {
-  it('should be able to register', async () => {
-    const usersRepository = new InMemoryUsersRepository()
-    const sut = new UserRegisterService(usersRepository)
+  let usersRepository: InMemoryUsersRepository
+  let sut: UserRegisterService
 
+  beforeEach(() => {
+    usersRepository = new InMemoryUsersRepository()
+    sut = new UserRegisterService(usersRepository)
+  })
+
+  it('should be able to register', async () => {
     const { user } = await sut.execute({
       name: 'John Doe',
       email: 'johndoe@example.com',
@@ -19,9 +24,6 @@ describe('User Registry Use Case', () => {
   })
 
   it('should be able to hash password upon registration', async () => {
-    const usersRepository = new InMemoryUsersRepository()
-    const sut = new UserRegisterService(usersRepository)
-
     const { user } = await sut.execute({
       name: 'John Doe',
       email: 'johndoe@example.com',
@@ -37,9 +39,6 @@ describe('User Registry Use Case', () => {
   })
 
   it('should not be able to register with same e-mail twice', async () => {
-    const usersRepository = new InMemoryUsersRepository()
-    const sut = new UserRegisterService(usersRepository)
-
     const email = 'johndoe@example.com'
 
     await sut.execute({
