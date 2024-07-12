@@ -1,15 +1,25 @@
 import { Prisma, Org } from '@prisma/client'
 import { OrgsRepository } from '@/repositories/org-repository'
-import { randomUUID } from 'crypto'
+import { randomUUID } from 'node:crypto'
+import { OrgNotFoundError } from '@/services/errors/org-not-found-error'
 
 export class InMemoryOrgsRepository implements OrgsRepository {
   public items: Org[] = []
-
   async findByName(name: string) {
     const org = this.items.find((item) => item.name === name)
 
     if (!org) {
       return null
+    }
+
+    return org
+  }
+
+  async findById(id: string) {
+    const org = this.items.find((item) => item.id === id)
+
+    if (!org) {
+      throw new OrgNotFoundError()
     }
 
     return org
