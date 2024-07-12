@@ -26,10 +26,11 @@ model Pet {
   id     String @id @default(uuid())
   name   String
   about  String
+  city   String
   breed  String
   status String @default("Avaliable")
 
-  orgId  Org    @relation(fields: [org_id], references: [id])
+  org    Org    @relation(fields: [org_id], references: [id])
   org_id String
 
   @@map("pets")
@@ -42,7 +43,7 @@ model Org {
   phone         String? @unique
   address       String? @unique
   password_hash String
-  Pets          Pet[]
+  pets          Pet[]
 
   @@map("orgs")
 }
