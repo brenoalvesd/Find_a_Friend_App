@@ -1,6 +1,7 @@
 import { Pet, Prisma } from '@prisma/client'
 import { PetsRepository } from '../pets-repository'
 import { randomUUID } from 'node:crypto'
+import { NoPetsAvaliableError } from '@/services/errors/no-pets-avaliable-error'
 
 export class InMemoryPetsRepository implements PetsRepository {
   public items: Pet[] = []
@@ -24,5 +25,15 @@ export class InMemoryPetsRepository implements PetsRepository {
     const pet = this.items.filter((pet) => pet.city === city)
 
     return pet
+  }
+
+  async findAvaliable(status: string) {
+    const avaliablePet = this.items.filter((pet) => pet.status === 'Avaliable')
+
+    if (!avaliablePet) {
+      throw new NoPetsAvaliableError()
+    }
+
+    return avaliablePet
   }
 }
