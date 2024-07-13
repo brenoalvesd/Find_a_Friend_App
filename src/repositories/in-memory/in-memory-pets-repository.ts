@@ -19,4 +19,10 @@ export class InMemoryPetsRepository implements PetsRepository {
 
     return pet
   }
+
+  async findNearby(city: string) {
+    const pet = this.items.filter((pet) => pet.city === city)
+
+    return pet
+  }
 }
