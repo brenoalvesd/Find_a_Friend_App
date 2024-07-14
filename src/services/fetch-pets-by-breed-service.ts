@@ -3,24 +3,24 @@ import { PetsRepository } from '@/repositories/pets-repository'
 import { OrgsRepository } from '@/repositories/org-repository'
 import { PetNotFoundError } from './errors/pet-not-found-error'
 
-interface FetchAvaliablePetsServiceRequest {
-  status: string
+interface FetchPetsByBreedServiceRequest {
+  breed: string
 }
 
-interface FetchAvaliablePetsServiceResponse {
+interface FetchPetsByBreedServiceResponse {
   pets: Pet[]
 }
 
-export class FetchAvaliablePetsService {
+export class FetchPetsByBreedService {
   constructor(
     private petsRepository: PetsRepository,
     private orgsRepository: OrgsRepository,
   ) {}
 
-  async findAvaliable({
-    status,
-  }: FetchAvaliablePetsServiceRequest): Promise<FetchAvaliablePetsServiceResponse> {
-    const pets = await this.petsRepository.findAvaliable(status)
+  async findByBreed({
+    breed,
+  }: FetchPetsByBreedServiceRequest): Promise<FetchPetsByBreedServiceResponse> {
+    const pets = await this.petsRepository.findByBreed(breed)
 
     if (!pets) {
       throw new PetNotFoundError()

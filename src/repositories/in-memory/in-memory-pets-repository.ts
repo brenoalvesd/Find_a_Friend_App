@@ -36,4 +36,10 @@ export class InMemoryPetsRepository implements PetsRepository {
 
     return avaliablePet
   }
+
+  async findByBreed(breed: string) {
+    const pet = this.items.filter((pet) => pet.breed === breed)
+
+    return pet
+  }
 }

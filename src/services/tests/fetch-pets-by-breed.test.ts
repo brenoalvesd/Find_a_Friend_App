@@ -1,20 +1,20 @@
 import { it, expect, describe, beforeEach } from 'vitest'
 import { InMemoryPetsRepository } from '@/repositories/in-memory/in-memory-pets-repository'
 import { InMemoryOrgsRepository } from '@/repositories/in-memory/in-memory-orgs-repository'
-import { FetchAvaliablePetsService } from '../fetch-avaliable-pets-service'
+import { FetchPetsByBreedService } from '../fetch-pets-by-breed-service'
 
-describe('Avaliable Pets Search Use Case', () => {
+describe('Pets Search By Breed Use Case', () => {
   let petsRepository: InMemoryPetsRepository
   let orgsRepository: InMemoryOrgsRepository
-  let sut: FetchAvaliablePetsService
+  let sut: FetchPetsByBreedService
 
   beforeEach(() => {
     petsRepository = new InMemoryPetsRepository()
     orgsRepository = new InMemoryOrgsRepository()
-    sut = new FetchAvaliablePetsService(petsRepository, orgsRepository)
+    sut = new FetchPetsByBreedService(petsRepository, orgsRepository)
   })
 
-  it('should be able to search for pets by its status', async () => {
+  it('should be able to search for pets by its breed', async () => {
     await orgsRepository.create({
       name: 'ONG dos Campeões',
       address: 'Rua Verde 321',
@@ -44,11 +44,11 @@ describe('Avaliable Pets Search Use Case', () => {
       id: '1234',
     })
 
-    const avaliablePets = await sut.findAvaliable({
-      status: 'Avaliable',
+    const pet = await sut.findByBreed({
+      breed: 'Pug',
     })
 
-    expect(avaliablePets.pets).toEqual([
+    expect(pet.pets).toEqual([
       expect.objectContaining({
         name: 'Ralph',
         about: 'O Pug mais lindo de todos',
