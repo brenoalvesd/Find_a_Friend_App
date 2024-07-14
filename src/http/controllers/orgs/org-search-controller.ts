@@ -15,5 +15,12 @@ export async function search(request: FastifyRequest, reply: FastifyReply) {
     name,
   })
 
-  return reply.status(201).send({ org })
+  await request.jwtVerify()
+
+  return reply.status(200).send({
+    org: {
+      ...org,
+      password_hash: undefined,
+    },
+  })
 }
