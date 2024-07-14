@@ -3,8 +3,24 @@ import { Pet, Prisma } from '@prisma/client'
 import { PetsRepository } from '../pets-repository'
 
 export class PrismaPetsRepository implements PetsRepository {
-  async findNearby(city: string): Promise<Pet[]> {
-    throw new Error('Method not implemented.')
+  async findByBreed(breed: string) {
+    const pets = await prisma.pet.findMany({
+      where: {
+        breed,
+      },
+    })
+
+    return pets
+  }
+
+  async findNearby(city: string) {
+    const pets = await prisma.pet.findMany({
+      where: {
+        city,
+      },
+    })
+
+    return pets
   }
 
   async create(data: Prisma.PetUncheckedCreateInput) {
@@ -13,5 +29,17 @@ export class PrismaPetsRepository implements PetsRepository {
     })
 
     return pet
+  }
+
+  async findAvaliable(status: string) {
+    const pets = await prisma.pet.findMany({
+      where: {
+        status: {
+          contains: 'Avaliable',
+        },
+      },
+    })
+
+    return pets
   }
 }

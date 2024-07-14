@@ -11,10 +11,6 @@ export class PrismaOrgsRepository implements OrgsRepository {
       },
     })
 
-    if (!org) {
-      return null
-    }
-
     return org
   }
 
@@ -25,10 +21,6 @@ export class PrismaOrgsRepository implements OrgsRepository {
       },
     })
 
-    if (!org) {
-      throw new OrgNotFoundError()
-    }
-
     return org
   }
 
@@ -38,10 +30,6 @@ export class PrismaOrgsRepository implements OrgsRepository {
         city,
       },
     })
-
-    if (!org) {
-      throw new OrgNotFoundError()
-    }
 
     return org
   }
