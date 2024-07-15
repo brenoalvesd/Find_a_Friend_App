@@ -1,8 +1,11 @@
 import fastify from 'fastify'
-import { orgRoutes } from './http/controllers/orgs/routes'
-import { ZodError } from 'zod'
-import { env } from './env'
 import fastifyJwt from '@fastify/jwt'
+import { env } from './env'
+import { ZodError } from 'zod'
+
+import { orgRoutes } from './http/controllers/orgs/routes'
+import { userRoutes } from './http/controllers/user/routes'
+import { petsRoutes } from './http/controllers/pets/routes'
 
 export const app = fastify()
 
@@ -11,6 +14,8 @@ app.register(fastifyJwt, {
 })
 
 app.register(orgRoutes)
+app.register(userRoutes)
+app.register(petsRoutes)
 
 app.setErrorHandler((error, _, reply) => {
   if (error instanceof ZodError) {
