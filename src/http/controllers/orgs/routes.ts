@@ -9,5 +9,5 @@ export async function orgRoutes(app: FastifyInstance) {
   app.post('/orgs/auth', authenticate)
 
   /** Authenticated */
-  app.get('/orgs/:name', { onRequest: [verifyJWT] }, search)
+  app.get('/orgs/name', { onRequest: [verifyJWT] }, search)
 }

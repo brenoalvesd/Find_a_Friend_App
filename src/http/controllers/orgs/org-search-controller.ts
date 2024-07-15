@@ -7,7 +7,7 @@ export async function search(request: FastifyRequest, reply: FastifyReply) {
     name: z.string(),
   })
 
-  const { name } = searchOrgParamsSchema.parse(request.params)
+  const { name } = searchOrgParamsSchema.parse(request.query)
 
   const searchOrgUseCase = makeSearchOrgUseCase()
 
