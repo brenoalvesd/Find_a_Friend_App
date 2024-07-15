@@ -8,6 +8,7 @@ export async function createAndAuthenticateOrg(app: FastifyInstance) {
     phone: '(85) 5656-6565',
     password: '123456',
     address: 'Rua Badejo 37',
+    id: 'EXAMPLE-ORG-ID',
   })
 
   const authResponse = await request(app.server).post('/orgs/auth').send({
