@@ -36,8 +36,6 @@ describe('Fetch Orgs by Name E2E', () => {
       .get('/orgs/name?name=ONG do Rio')
       .set('Authorization', `Bearer ${token}`)
 
-    console.log(response)
-
     expect(response.statusCode).toEqual(200)
     expect(response.body).toEqual({
       org: {
